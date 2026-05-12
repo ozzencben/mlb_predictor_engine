@@ -50,7 +50,6 @@ export default function Home() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      console.log("Current API URL:", process.env.NEXT_PUBLIC_API_URL);
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/predictions/latest`);
       setMatches(response.data.data || []);
       setError(null);
@@ -68,7 +67,6 @@ export default function Home() {
 
   const renderStars = (confidence: number | null | undefined) => {
     if (!confidence) return "N/A";
-    // 10 üzerinden olan skoru yıldıza çeviriyoruz (max 5 yıldız görseli için bölebiliriz veya direkt 10 yıldıza kadar yazdırabiliriz. Şık durması için ★ kullanacağız)
     const starCount = Math.min(10, Math.max(1, Math.round(confidence)));
     return "★".repeat(starCount);
   };
@@ -94,7 +92,7 @@ export default function Home() {
         {matches.map((match) => {
           const edge = match.ml_edge ?? 0;
           const isValue = edge >= 0.05;
-          const isSuperValue = edge >= 0.15; // %15 Edge tam bir Super Value!
+          const isSuperValue = edge >= 0.15;
 
           let cardClass = styles.card;
           if (isSuperValue) cardClass = `${styles.card} ${styles.cardSuperValue}`;
@@ -200,8 +198,6 @@ export default function Home() {
         })}
       </main>
 
-      {/* ... main içeriği bittikten sonra ... */}
-
       <footer className={styles.footer}>
         <div className={styles.signature}>
           Created with precision by <a href="mailto:ozzencben@gmail.com">Ozenc</a>
@@ -218,10 +214,10 @@ export default function Home() {
           <span>•</span>
           <a href="#">Documentation</a>
           <span>•</span>
-          <span>© 2026 MLB Predictor Engine v2.0</span>
+          <span>© 2026 MLB Predictor Engine v2.1</span>
         </div>
       </footer>
 
-    </div >
+    </div>
   );
 }
