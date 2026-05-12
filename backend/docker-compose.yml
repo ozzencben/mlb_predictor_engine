@@ -1,0 +1,12 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL:-http://mock.supabase.url}
+      - SUPABASE_KEY=${SUPABASE_KEY:-mock_key}
+      - CRON_SECRET=${CRON_SECRET:-default_dev_secret}
+    volumes:
+      - .:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload

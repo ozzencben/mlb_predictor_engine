@@ -1,0 +1,92 @@
+{
+    "Angels": {
+        "rating": 5.5
+    },
+    "Guardians": {
+        "rating": 3.95
+    },
+    "Yankees": {
+        "rating": 3.65
+    },
+    "Orioles": {
+        "rating": 4.92
+    },
+    "Rockies": {
+        "rating": 5.8
+    },
+    "Pirates": {
+        "rating": 4.28
+    },
+    "Nationals": {
+        "rating": 6.42
+    },
+    "Reds": {
+        "rating": 4.09
+    },
+    "Phillies": {
+        "rating": 4.3
+    },
+    "Red Sox": {
+        "rating": 4.71
+    },
+    "Rays": {
+        "rating": 4.99
+    },
+    "Blue Jays": {
+        "rating": 3.92
+    },
+    "Tigers": {
+        "rating": 5.3
+    },
+    "Mets": {
+        "rating": 5.26
+    },
+    "Cubs": {
+        "rating": 3.94
+    },
+    "Braves": {
+        "rating": 2.2
+    },
+    "Royals": {
+        "rating": 5.08
+    },
+    "White Sox": {
+        "rating": 6.31
+    },
+    "Padres": {
+        "rating": 4.13
+    },
+    "Brewers": {
+        "rating": 5.19
+    },
+    "Marlins": {
+        "rating": 4.17
+    },
+    "Twins": {
+        "rating": 6.35
+    },
+    "Diamondbacks": {
+        "rating": 2.88
+    },
+    "Rangers": {
+        "rating": 3.43
+    },
+    "Mariners": {
+        "rating": 3.97
+    },
+    "Astros": {
+        "rating": 6.64
+    },
+    "Cardinals": {
+        "rating": 6.02
+    },
+    "Athletics": {
+        "rating": 4.86
+    },
+    "Giants": {
+        "rating": 3.58
+    },
+    "Dodgers": {
+        "rating": 3.72
+    }
+}
