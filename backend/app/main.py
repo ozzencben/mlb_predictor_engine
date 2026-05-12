@@ -17,15 +17,18 @@ origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://mlb-predictor-app.vercel.app",
-    "https://mlb-predictor-engine-an47qzgkl-ozzencs-projects.vercel.app"
+    "https://mlb-predictor-engine-an47qzgkl-ozzencs-projects.vercel.app",
+    "https://mlb-predictor-engine-h87gk00p3-ozzencs-projects.vercel.app/"
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    # 🚨 allow_origins=origins yerine direkt ["*"] yazıyoruz.
+    # Bu, "Dünyanın neresinden gelirse gelsin isteği kabul et" demektir.
+    allow_origins=["*"], 
     allow_credentials=True,
-    allow_methods=["*"], 
-    allow_headers=["*"], 
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 def verify_cron_secret(cron_secret: Optional[str] = Header(None)):
