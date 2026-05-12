@@ -13,9 +13,9 @@
   padding: 2.5rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   overflow-x: hidden;
-  /* Taşmayı kökten engeller */
+  position: relative;
 }
 
 /* =========================================
@@ -37,6 +37,8 @@
   color: #1e293b;
   margin: 0;
   letter-spacing: -0.02em;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .refreshBtn {
@@ -64,7 +66,7 @@
 .grid {
   display: grid;
   /* auto-fit ve 350px kullanarak kartların çok daha uyumlu esnemesini sağladık */
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
   gap: 2rem;
   width: 100%;
 }
@@ -136,6 +138,9 @@
   color: #64748b;
   margin-top: 0.5rem;
   font-weight: 500;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
 }
 
 .sectionTitle {
@@ -162,6 +167,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  min-width: 0;
 }
 
 .statLabel {
@@ -174,6 +180,8 @@
   font-size: 1.1rem;
   font-weight: 700;
   color: #0f172a;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .statValueHighlight {
@@ -321,11 +329,12 @@
 
   .statItem {
     flex-direction: row;
-    /* Mobilde etiket solda, değer sağda yan yana */
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #e2e8f0;
     padding: 0.75rem 0;
+    gap: 0.5rem;
+    min-width: 0;
   }
 
   .statItem:last-child {
@@ -344,6 +353,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 0;
+    gap: 0.5rem;
+    min-width: 0;
   }
 
   .actionItem:first-child {
