@@ -17,6 +17,7 @@ origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://mlb-predictor-app.vercel.app",
+    "https://mlb-predictor-engine-an47qzgkl-ozzencs-projects.vercel.app"
 ]
 
 app.add_middleware(
