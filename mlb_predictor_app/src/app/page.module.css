@@ -249,3 +249,75 @@
 .footerLinks a:hover {
   color: #0f172a;
 }
+
+/* =========================================
+   📱 RESPONSIVE DESIGN (MOBILE FIXES)
+========================================= */
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+    /* Kenar boşluklarını daralt */
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    /* Başlığı mobilde bir tık küçült */
+  }
+
+  .refreshBtn {
+    width: 100%;
+    /* Butonu mobilde tam genişlik yap */
+    text-align: center;
+  }
+
+  .grid {
+    /* ASIL ÇÖZÜM: 500px zorunluluğunu kaldırıp tek sütun yapıyoruz */
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .statsRow {
+    /* Mobilde istatistiklerin birbirine girmemesi için alt alta diz */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .actionRow {
+    /* F5 Pick ve O/U değerlerini mobilde rahat okunsun diye alt alta diz */
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .actionItem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+  }
+
+  .actionItem:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .footerLinks {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

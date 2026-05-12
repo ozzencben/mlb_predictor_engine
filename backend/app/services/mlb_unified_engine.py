@@ -128,6 +128,10 @@ class MLBUnifiedEngine:
         hfa_mult = self.hfa if offense_is_home else 1.0
         raw_score = base_score * off * pitch * vol * hfa_mult
         
+        # F5 Inning Scaling: Scale down 9 innings to 5 innings
+        if segment == "f5":
+            raw_score *= (5.0 / 9.0)
+            
         return round(max(0.0, min(15.0, raw_score)), 1)
 
     def _calculate_nrfi_proxy(self, away_team, home_team, away_pitcher, home_pitcher):
@@ -157,7 +161,15 @@ class MLBUnifiedEngine:
             0.03 * (1.0 - baThrA) + 0.03 * (1.0 - baThrH) + 
             0.065 * (1.0 - eraThrA) + 0.065 * (1.0 - eraThrH)
         )
-        return round(nrfi_score * 100.0, 1)
+        
+        # NRFI/YRFI Confidence Labeling:
+        # The client's Excel formula evaluates independent NRFI and YRFI scores
+        # and takes the MAX of both as a Confidence score, rather than a pure probability.
+        # We proxy YRFI as 1.0 - nrfi_score for now to replicate the MAX evaluation.
+        yrfi_score = 1.0 - nrfi_score
+        confidence = max(nrfi_score, yrfi_score)
+        
+        return round(confidence * 100.0, 1)
 
     def predict_matchup(self, away_team, home_team, away_pitcher, home_pitcher, away_lineup=None, home_lineup=None):
         """Main prediction method uniting all segments into a comprehensive dictionary."""
@@ -182,6 +194,10 @@ class MLBUnifiedEngine:
             offense_is_home=True, pitcher_is_home=False, lineup=home_lineup
         )
         
+        # Safety Check: Full Game must always project >= F5 + 0.5
+        away_full = max(away_full, away_f5 + 0.5)
+        home_full = max(home_full, home_f5 + 0.5)
+        
         # 3. Probabilities Integration
         _, _, pythag_f5 = self._get_situational_vars("f5")
         _, _, pythag_full = self._get_situational_vars("full")
@@ -194,6 +210,9 @@ class MLBUnifiedEngine:
             return a_pow / (a_pow + h_pow), h_pow / (a_pow + h_pow)
             
         away_f5_prob, home_f5_prob = calc_prob(away_f5, home_f5, pythag_f5)
+        
+        # Pythagorean Expectation (1.83 Exponent):
+        # strictly using the Full Game Scores before applying the Score^1.83 formula
         away_full_prob, home_full_prob = calc_prob(away_full, home_full, pythag_full)
         
         # 4. Process NRFI

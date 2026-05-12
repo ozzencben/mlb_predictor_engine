@@ -50,6 +50,7 @@ export default function Home() {
   const fetchData = async () => {
     setLoading(true);
     try {
+      console.log("Current API URL:", process.env.NEXT_PUBLIC_API_URL);
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/predictions/latest`);
       setMatches(response.data.data || []);
       setError(null);
@@ -153,7 +154,7 @@ export default function Home() {
                 <div className={styles.sectionTitle}>Market Advantage</div>
                 <div className={styles.statsRow}>
                   <div className={styles.statItem}>
-                    <span className={styles.statLabel}>NRFI Probability</span>
+                    <span className={styles.statLabel}>NRFI/YRFI Confidence</span>
                     <span className={styles.statValue}>
                       {safeFormat((match.nrfi_prob || 0) * 100, 1, "%")}
                     </span>

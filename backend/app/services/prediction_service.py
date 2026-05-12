@@ -195,7 +195,9 @@ class PredictionService:
                         ml_edge = max(away_edge, home_edge)
 
                 # Inject ALL required fields into original match dictionary
-                match["nrfi_prob"] = nrfi_prob / 100.0 if nrfi_prob else None
+                # Using max confidence from proxy calculation
+                match["nrfi_confidence"] = nrfi_prob / 100.0 if nrfi_prob else None
+                match["nrfi_prob"] = match["nrfi_confidence"] # legacy compatibility
                 match["f5_away_score"] = f5_away_score
                 match["f5_home_score"] = f5_home_score
                 match["full_away_score"] = full_away_score
