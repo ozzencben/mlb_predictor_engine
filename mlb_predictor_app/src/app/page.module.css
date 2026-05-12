@@ -1,23 +1,26 @@
 /* =========================================
-   GLOBAL & PAGE WRAPPER
+   GLOBAL RESETS (Sadece bu sayfa için)
 ========================================= */
+.page,
+.page * {
+  box-sizing: border-box !important;
+}
+
 .page {
-  box-sizing: border-box;
   min-height: 100vh;
   background-color: #f8fafc;
   color: #0f172a;
   padding: 2.5rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  width: 100vw;
-  max-width: 100%;
-  /* Ekran dışına taşmayı kesin engeller */
+  width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
+  /* Taşmayı kökten engeller */
 }
 
-.page * {
-  box-sizing: border-box;
-}
-
+/* =========================================
+   HEADER
+========================================= */
 .header {
   display: flex;
   justify-content: space-between;
@@ -56,35 +59,32 @@
 }
 
 /* =========================================
-   DESKTOP GRID SYSTEM
+   DESKTOP GRID (Bilgisayar Görünümü)
 ========================================= */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  /* auto-fit ve 350px kullanarak kartların çok daha uyumlu esnemesini sağladık */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   width: 100%;
-  max-width: 100%;
 }
 
+/* =========================================
+   CARD & BADGES
+========================================= */
 .card {
   background-color: #ffffff;
   border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
   border: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   position: relative;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
+  /* Sağ üstteki rozetin dışarı taşmasını engeller */
   width: 100%;
-  max-width: 100%;
-  /* Kartın konteynerı aşmasını engeller */
-}
-
-.card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
 }
 
 .cardValue {
@@ -97,6 +97,24 @@
   box-shadow: 0 10px 30px -5px rgba(245, 158, 11, 0.2);
 }
 
+.superBadge {
+  position: absolute;
+  top: 1.2rem;
+  right: -2.5rem;
+  background-color: #f59e0b;
+  color: white;
+  padding: 0.25rem 3rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.05em;
+  z-index: 10;
+}
+
+/* =========================================
+   TYPOGRAPHY & STATS
+========================================= */
 .matchupHeader {
   text-align: center;
   border-bottom: 1px solid #f1f5f9;
@@ -105,36 +123,33 @@
 }
 
 .teams {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #0f172a;
-  line-height: 1.2;
-  /* KESİN ÇÖZÜM: Uzun isimler taşıp kartı büyütmesin diye satır kırar */
+  line-height: 1.3;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: auto;
 }
 
 .pitchers {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #64748b;
   margin-top: 0.5rem;
   font-weight: 500;
 }
 
 .sectionTitle {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #94a3b8;
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .statsRow {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  /* minmax(0, 1fr) taşmayı önler */
+  grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
   background-color: #f8fafc;
   padding: 1.25rem;
@@ -147,19 +162,16 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  min-width: 0;
-  /* İçerik taşmasını engeller */
 }
 
 .statLabel {
   font-size: 0.75rem;
   color: #64748b;
   font-weight: 600;
-  white-space: nowrap;
 }
 
 .statValue {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #0f172a;
 }
@@ -168,6 +180,15 @@
   color: #10b981;
 }
 
+.confidenceStars {
+  color: #f59e0b;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+/* =========================================
+   ACTION ROW (BOTTOM BAR)
+========================================= */
 .actionRow {
   display: flex;
   justify-content: space-between;
@@ -187,7 +208,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 0;
 }
 
 .actionItem:first-child {
@@ -219,27 +239,9 @@
   color: #cbd5e1;
 }
 
-.confidenceStars {
-  color: #f59e0b;
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-}
-
-.superBadge {
-  position: absolute;
-  top: 1.2rem;
-  right: -2.5rem;
-  background-color: #f59e0b;
-  color: white;
-  padding: 0.25rem 3rem;
-  font-size: 0.75rem;
-  font-weight: 800;
-  transform: rotate(45deg);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  letter-spacing: 0.05em;
-  z-index: 10;
-}
-
+/* =========================================
+   FOOTER
+========================================= */
 .footer {
   margin-top: 4rem;
   padding-top: 2rem;
@@ -259,12 +261,6 @@
 .signature a {
   color: #3b82f6;
   text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.signature a:hover {
-  color: #2563eb;
-  text-decoration: underline;
 }
 
 .footerLinks {
@@ -275,33 +271,25 @@
 .footerLinks a {
   color: #94a3b8;
   text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footerLinks a:hover {
-  color: #0f172a;
 }
 
 /* =========================================
-   📱 BULLETPROOF MOBILE FIX (MAX 768px)
+   📱 MOBIL İÇİN KESİN ÇÖZÜM (MAX 768px)
 ========================================= */
 @media (max-width: 768px) {
   .page {
     padding: 1rem;
-    overflow-x: hidden;
-    /* Garantilemek için */
+    /* Telefondaki kenar boşluğunu daralttık */
   }
 
   .header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    margin-bottom: 1.5rem;
   }
 
   .title {
-    font-size: 1.75rem;
-    /* Mobilde başlık daha derli toplu */
+    font-size: 1.8rem;
   }
 
   .refreshBtn {
@@ -309,38 +297,45 @@
   }
 
   .grid {
-    /* GRİD İPTAL: Mobilde kartların patlamaması için Flexbox'a geçiyoruz */
     display: flex;
+    /* Grid'i tamamen kapattık, Flex'e geçtik */
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
     width: 100%;
   }
 
   .card {
-    padding: 1.25rem;
-    width: 100%;
-    margin: 0;
-  }
-
-  .teams {
-    font-size: 1.25rem;
-    /* Metni biraz küçültüyoruz */
-  }
-
-  .statsRow {
-    grid-template-columns: 1fr;
-    /* İstatistikler alt alta */
+    padding: 1rem;
+    border-radius: 12px;
     gap: 1rem;
   }
 
-  .statLabel {
-    white-space: normal;
+  .statsRow {
+    display: flex;
+    /* İstatistik alanını da listeye çevirdik */
+    flex-direction: column;
+    gap: 0;
+    /* Aradaki boşluğu kapattık, aralara çizgi ekleyeceğiz */
+    padding: 0.5rem 1rem;
+  }
+
+  .statItem {
+    flex-direction: row;
+    /* Mobilde etiket solda, değer sağda yan yana */
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.75rem 0;
+  }
+
+  .statItem:last-child {
+    border-bottom: none;
   }
 
   .actionRow {
     flex-direction: column;
+    padding: 0.5rem 1rem;
     gap: 0;
-    padding: 1rem;
   }
 
   .actionItem {
@@ -362,13 +357,12 @@
 
   .footer {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     text-align: center;
   }
 
   .footerLinks {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem;
   }
 }
