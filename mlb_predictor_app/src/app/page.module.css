@@ -1,19 +1,21 @@
 /* =========================================
-   GLOBAL RESET
+   GLOBAL & PAGE WRAPPER
 ========================================= */
-.page * {
-  box-sizing: border-box;
-}
-
 .page {
+  box-sizing: border-box;
   min-height: 100vh;
   background-color: #f8fafc;
   color: #0f172a;
   padding: 2.5rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  width: 100%;
+  width: 100vw;
+  max-width: 100%;
+  /* Ekran dışına taşmayı kesin engeller */
   overflow-x: hidden;
-  /* KESİN ÇÖZÜM 1: Yatay kaymayı tamamen engeller */
+}
+
+.page * {
+  box-sizing: border-box;
 }
 
 .header {
@@ -53,12 +55,15 @@
   transform: translateY(-2px);
 }
 
+/* =========================================
+   DESKTOP GRID SYSTEM
+========================================= */
 .grid {
   display: grid;
-  /* KESİN ÇÖZÜM 2: Ekran 450px'den küçükse 100% genişlik al, büyükse 450px al */
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 450px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 2rem;
   width: 100%;
+  max-width: 100%;
 }
 
 .card {
@@ -72,9 +77,10 @@
   gap: 1.5rem;
   position: relative;
   overflow: hidden;
-  /* Rozetin kart dışına taşmasını engeller */
   transition: box-shadow 0.3s ease;
   width: 100%;
+  max-width: 100%;
+  /* Kartın konteynerı aşmasını engeller */
 }
 
 .card:hover {
@@ -95,6 +101,7 @@
   text-align: center;
   border-bottom: 1px solid #f1f5f9;
   padding-bottom: 1rem;
+  width: 100%;
 }
 
 .teams {
@@ -102,6 +109,10 @@
   font-weight: 800;
   color: #0f172a;
   line-height: 1.2;
+  /* KESİN ÇÖZÜM: Uzun isimler taşıp kartı büyütmesin diye satır kırar */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .pitchers {
@@ -122,24 +133,29 @@
 
 .statsRow {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* minmax(0, 1fr) taşmayı önler */
   gap: 1.25rem;
   background-color: #f8fafc;
   padding: 1.25rem;
   border-radius: 12px;
   border: 1px solid #f1f5f9;
+  width: 100%;
 }
 
 .statItem {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  min-width: 0;
+  /* İçerik taşmasını engeller */
 }
 
 .statLabel {
   font-size: 0.75rem;
   color: #64748b;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .statValue {
@@ -162,6 +178,7 @@
   border-radius: 12px;
   margin-top: auto;
   gap: 1rem;
+  width: 100%;
 }
 
 .actionItem {
@@ -170,9 +187,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 0;
 }
 
-/* Çizgi ayırıcı (Desktop) */
 .actionItem:first-child {
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -186,7 +203,7 @@
 }
 
 .actionValue {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 800;
 }
 
@@ -266,50 +283,69 @@
 }
 
 /* =========================================
-   📱 RESPONSIVE DESIGN (MOBILE FIXES)
+   📱 BULLETPROOF MOBILE FIX (MAX 768px)
 ========================================= */
 @media (max-width: 768px) {
   .page {
     padding: 1rem;
-    /* Mobilde kenar boşluklarını kıs */
+    overflow-x: hidden;
+    /* Garantilemek için */
   }
 
   .header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    /* Mobilde başlık daha derli toplu */
   }
 
   .refreshBtn {
     width: 100%;
   }
 
+  .grid {
+    /* GRİD İPTAL: Mobilde kartların patlamaması için Flexbox'a geçiyoruz */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
   .card {
     padding: 1.25rem;
-    /* Mobilde kart iç boşluğunu daralt */
+    width: 100%;
+    margin: 0;
+  }
+
+  .teams {
+    font-size: 1.25rem;
+    /* Metni biraz küçültüyoruz */
   }
 
   .statsRow {
     grid-template-columns: 1fr;
-    /* Mobilde tüm istatistikler alt alta */
+    /* İstatistikler alt alta */
     gap: 1rem;
+  }
+
+  .statLabel {
+    white-space: normal;
   }
 
   .actionRow {
     flex-direction: column;
-    /* Alt siyah şeritteki butonları alt alta al */
     gap: 0;
+    padding: 1rem;
   }
 
   .actionItem {
     width: 100%;
     flex-direction: row;
-    /* Yazıları yan yana diz (Örn: F5 Pick ---> Red Sox) */
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 0;
