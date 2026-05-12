@@ -50,7 +50,7 @@ export default function Home() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/predictions/latest`);
+      const response = await axios.get(`https://mlb-predictor-engine.onrender.com/api/v1/predictions/latest`);
       setMatches(response.data.data || []);
       setError(null);
     } catch (err) {
