@@ -21,7 +21,8 @@
 /* ── HEADER ────────────────────────────────────────────── */
 .header {
   display: flex;
-  flex-direction: column;   /* mobil-first: dikey */
+  flex-direction: column;
+  /* mobil-first: dikey */
   gap: 0.75rem;
   margin-bottom: 1.25rem;
   padding-bottom: 1rem;
@@ -72,6 +73,8 @@
   border: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   gap: 0.875rem;
   position: relative;
   overflow: hidden;
@@ -243,9 +246,17 @@
   overflow-wrap: anywhere;
 }
 
-.badgeUnder { color: #f87171; }
-.badgeOver  { color: #60a5fa; }
-.badgePass  { color: #cbd5e1; }
+.badgeUnder {
+  color: #f87171;
+}
+
+.badgeOver {
+  color: #60a5fa;
+}
+
+.badgePass {
+  color: #cbd5e1;
+}
 
 /* ── FOOTER ─────────────────────────────────────────────── */
 .footer {
